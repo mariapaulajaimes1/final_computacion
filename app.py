@@ -9,7 +9,23 @@ st.set_page_config(
     page_title="Análisis de Sensores - Mi Ciudad",
     page_icon="📊",
     layout="wide"
+    
 )
+# Estilos personalizados: color de fondo y tipografía Poppins
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Poppins', sans-serif;
+        background-color: #cbecb6;
+    }
+
+    .stApp {
+        background-color: #cbecb6;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Mostrar imagen superior (banner)
 banner_image = Image.open("banner1.png")
