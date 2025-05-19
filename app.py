@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # Mostrar imagen superior (banner)
-banner_image = Image.open("bannersup.png")
+banner_image = Image.open("banner1.png")
 st.image(banner_image, use_column_width=True)
 
 # CSS personalizado
@@ -181,7 +181,7 @@ else:
     st.warning('Por favor, cargue un archivo CSV para comenzar el análisis.')
 
 # Imagen inferior (footer)
-footer_image = Image.open("footer.png")
+footer_image = Image.open("footer1.png")
 st.image(footer_image, use_column_width=True)
 
 # Footer con texto
