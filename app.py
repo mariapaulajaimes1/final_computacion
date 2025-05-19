@@ -29,7 +29,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Mostrar imagen superior (banner)
-banner_image = Image.open("banner1.png")
+banner_image = Image.open("banner2.png")
 st.image(banner_image, use_column_width=True)
 
 # CSS personalizado
