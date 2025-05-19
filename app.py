@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 from PIL import Image
+import numpy as np
 from datetime import datetime
 
 # Configuración de la página
@@ -10,7 +11,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# Estilos CSS opcionales
+# Mostrar imagen superior (banner)
+banner_image = Image.open("bannersup.png")
+st.image(banner_image, use_column_width=True)
+
+# CSS personalizado
 st.markdown("""
     <style>
     .main {
@@ -22,10 +27,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 🌄 Imagen superior tipo banner (local)
-banner_image = Image.open("bannersup.png")
-st.image(banner_image, use_column_width=True)
-
 # Título y descripción
 st.title('📊 Análisis de datos de Sensores en Mi Ciudad')
 st.markdown("""
@@ -33,24 +34,26 @@ st.markdown("""
     recolectados por sensores ESP32 en diferentes puntos de la ciudad.
 """)
 
-# Mapa con ubicación
+# Ubicación del sensor EAFIT
 eafit_location = pd.DataFrame({
     'lat': [6.2006],
     'lon': [-75.5783],
     'location': ['Universidad EAFIT']
 })
+
 st.subheader("📍 Ubicación de los Sensores - Universidad EAFIT")
 st.map(eafit_location, zoom=15)
 
-# Carga de archivo CSV
+# Cargador de archivo
 uploaded_file = st.file_uploader('Seleccione archivo CSV', type=['csv'])
 
 if uploaded_file is not None:
     try:
-        df1 = pd.read_csv(uploaded_file)
-        
-        # 🎈 Globos
+        # Mostrar globos
         st.balloons()
+
+        # Leer datos
+        df1 = pd.read_csv(uploaded_file)
 
         # Renombrar columnas
         column_mapping = {
@@ -58,17 +61,18 @@ if uploaded_file is not None:
             'humedad {device="ESP32", name="Sensor 1"}': 'humedad'
         }
         df1 = df1.rename(columns=column_mapping)
+
         df1['Time'] = pd.to_datetime(df1['Time'])
         df1 = df1.set_index('Time')
 
-        # Tabs
+        # Crear pestañas
         tab1, tab2, tab3, tab4 = st.tabs(["📈 Visualización", "📊 Estadísticas", "🔍 Filtros", "🗺️ Información del Sitio"])
 
         with tab1:
             st.subheader('Visualización de Datos')
             variable = st.selectbox("Seleccione variable a visualizar", ["temperatura", "humedad", "Ambas variables"])
             chart_type = st.selectbox("Seleccione tipo de gráfico", ["Línea", "Área", "Barra"])
-            
+
             if variable == "Ambas variables":
                 st.write("### Temperatura")
                 if chart_type == "Línea":
@@ -77,7 +81,7 @@ if uploaded_file is not None:
                     st.area_chart(df1["temperatura"])
                 else:
                     st.bar_chart(df1["temperatura"])
-
+                
                 st.write("### Humedad")
                 if chart_type == "Línea":
                     st.line_chart(df1["humedad"])
@@ -100,6 +104,7 @@ if uploaded_file is not None:
             st.subheader('Análisis Estadístico')
             stat_variable = st.radio("Seleccione variable para estadísticas", ["temperatura", "humedad"])
             stats_df = df1[stat_variable].describe()
+
             col1, col2 = st.columns(2)
             with col1:
                 st.dataframe(stats_df)
@@ -116,7 +121,9 @@ if uploaded_file is not None:
         with tab3:
             st.subheader('Filtros de Datos')
             filter_variable = st.selectbox("Seleccione variable para filtrar", ["temperatura", "humedad"])
+
             col1, col2 = st.columns(2)
+
             with col1:
                 min_val = st.slider(
                     f'Valor mínimo de {filter_variable}',
@@ -126,8 +133,9 @@ if uploaded_file is not None:
                     key="min_val"
                 )
                 filtrado_df_min = df1[df1[filter_variable] > min_val]
-                st.write(f"Registros con {filter_variable} > {min_val}:")
+                st.write(f"Registros con {filter_variable} superior a {min_val}{'°C' if filter_variable == 'temperatura' else '%'}:")
                 st.dataframe(filtrado_df_min)
+
             with col2:
                 max_val = st.slider(
                     f'Valor máximo de {filter_variable}',
@@ -137,7 +145,7 @@ if uploaded_file is not None:
                     key="max_val"
                 )
                 filtrado_df_max = df1[df1[filter_variable] < max_val]
-                st.write(f"Registros con {filter_variable} < {max_val}:")
+                st.write(f"Registros con {filter_variable} inferior a {max_val}{'°C' if filter_variable == 'temperatura' else '%'}:")
                 st.dataframe(filtrado_df_max)
 
             if st.button('Descargar datos filtrados'):
@@ -172,11 +180,11 @@ if uploaded_file is not None:
 else:
     st.warning('Por favor, cargue un archivo CSV para comenzar el análisis.')
 
-# 🖼️ Imagen inferior tipo footer (local)
+# Imagen inferior (footer)
 footer_image = Image.open("footer.png")
 st.image(footer_image, use_column_width=True)
 
-# Pie de página
+# Footer con texto
 st.markdown("""
 ---
 Desarrollado para el análisis de datos de sensores urbanos.  
