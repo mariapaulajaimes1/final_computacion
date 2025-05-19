@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Estilos CSS personalizados
+# Estilos CSS opcionales
 st.markdown("""
     <style>
     .main {
@@ -19,19 +19,12 @@ st.markdown("""
     .stAlert {
         margin-top: 1rem;
     }
-    .banner, .footer-img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-        max-height: 180px;
-        object-fit: cover;
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# 🌄 Imagen superior tipo banner (reemplaza la URL por la tuya)
-st.markdown('<img class="banner" src="https://via.placeholder.com/1200x180.png?text=Cooltivo+Banner">', unsafe_allow_html=True)
+# 🌄 Imagen superior tipo banner (local)
+banner_image = Image.open("bannersup.png")
+st.image(banner_image, use_column_width=True)
 
 # Título y descripción
 st.title('📊 Análisis de datos de Sensores en Mi Ciudad')
@@ -56,7 +49,7 @@ if uploaded_file is not None:
     try:
         df1 = pd.read_csv(uploaded_file)
         
-        # Mostrar globos de celebración
+        # 🎈 Globos
         st.balloons()
 
         # Renombrar columnas
@@ -68,7 +61,7 @@ if uploaded_file is not None:
         df1['Time'] = pd.to_datetime(df1['Time'])
         df1 = df1.set_index('Time')
 
-        # Tabs de análisis
+        # Tabs
         tab1, tab2, tab3, tab4 = st.tabs(["📈 Visualización", "📊 Estadísticas", "🔍 Filtros", "🗺️ Información del Sitio"])
 
         with tab1:
@@ -179,8 +172,9 @@ if uploaded_file is not None:
 else:
     st.warning('Por favor, cargue un archivo CSV para comenzar el análisis.')
 
-# Imagen tipo footer (reemplaza la URL por la tuya)
-st.markdown('<img class="footer-img" src="https://via.placeholder.com/1200x150.png?text=Cooltivo+Footer">', unsafe_allow_html=True)
+# 🖼️ Imagen inferior tipo footer (local)
+footer_image = Image.open("footer.png")
+st.image(footer_image, use_column_width=True)
 
 # Pie de página
 st.markdown("""
@@ -188,4 +182,3 @@ st.markdown("""
 Desarrollado para el análisis de datos de sensores urbanos.  
 Ubicación: Universidad EAFIT, Medellín, Colombia
 """)
-
