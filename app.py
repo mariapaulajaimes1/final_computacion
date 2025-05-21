@@ -47,8 +47,7 @@ st.markdown("""
 # Título y descripción
 st.title('📊 Análisis de datos de Sensores en Mi Ciudad')
 st.markdown("""
-    Esta aplicación permite analizar datos de temperatura y humedad
-    recolectados por sensores ESP32 en diferentes puntos de la ciudad.
+   Cooltivo es una app que te permite explorar datos de temperatura y humedad recolectados por sensores en distintos puntos de la ciudad. Con ella puedes ver gráficos, analizar estadísticas y entender mejor cómo cambia el clima a tu alrededor. ¡Ideal para aprender, investigar o simplemente conocer tu ciudad desde una nueva perspectiva!
 """)
 
 # Ubicación del sensor EAFIT
