@@ -45,7 +45,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Título y descripción
-st.title('📊 Análisis de datos de Sensores en Mi Ciudad')
+st.title('📊 Bienvenido a CoolTivo')
 st.markdown("""
    Cooltivo es una app que te permite explorar datos de temperatura 
    y humedad recolectados por sensores en la universidad EAFIT. 
