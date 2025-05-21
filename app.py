@@ -6,19 +6,15 @@ from datetime import datetime
 
 # Configuración de la página
 st.set_page_config(
-    
     page_title="Bienvenido a CoolTivo",
     page_icon="📊",
     layout="wide"
-    
 )
-# Estilos personalizados: color de fondo y tipografía Poppins
+
+# Estilos personalizados: solo color de fondo, sin tipografía Poppins
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
     html, body, [class*="css"]  {
-        font-family: 'Poppins', sans-serif;
         background-color: #cbecb6;
     }
 
@@ -69,23 +65,17 @@ uploaded_file = st.file_uploader('Seleccione archivo CSV', type=['csv'])
 
 if uploaded_file is not None:
     try:
-        # Mostrar globos
         st.balloons()
-
-        # Leer datos
         df1 = pd.read_csv(uploaded_file)
 
-        # Renombrar columnas
         column_mapping = {
             'temperatura {device="ESP32", name="Sensor 1"}': 'temperatura',
             'humedad {device="ESP32", name="Sensor 1"}': 'humedad'
         }
         df1 = df1.rename(columns=column_mapping)
-
         df1['Time'] = pd.to_datetime(df1['Time'])
         df1 = df1.set_index('Time')
 
-        # Crear pestañas
         tab1, tab2, tab3, tab4 = st.tabs(["📈 Visualización", "📊 Estadísticas", "🔍 Filtros", "🗺️ Información del Sitio"])
 
         with tab1:
