@@ -7,7 +7,7 @@ from datetime import datetime
 # Configuración de la página
 st.set_page_config(
     
-    page_title="Análisis de Sensores - Mi Ciudad",
+    page_title="Bienvenido a CoolTivo",
     page_icon="📊",
     layout="wide"
     
@@ -47,7 +47,11 @@ st.markdown("""
 # Título y descripción
 st.title('📊 Análisis de datos de Sensores en Mi Ciudad')
 st.markdown("""
-   Cooltivo es una app que te permite explorar datos de temperatura y humedad recolectados por sensores en distintos puntos de la ciudad. Con ella puedes ver gráficos, analizar estadísticas y entender mejor cómo cambia el clima a tu alrededor. ¡Ideal para aprender, investigar o simplemente conocer tu ciudad desde una nueva perspectiva!
+   Cooltivo es una app que te permite explorar datos de temperatura 
+   y humedad recolectados por sensores en la universidad EAFIT. 
+   Con ella puedes ver gráficos, analizar estadísticas y entender mejor
+   cómo cambia el clima. ¡Ideal para aprender, investigar o
+   simplemente conocer un espacio desde una nueva perspectiva!
 """)
 
 # Ubicación del sensor EAFIT
