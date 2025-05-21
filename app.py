@@ -26,7 +26,7 @@ st.markdown("""
 
 # Mostrar imagen superior (banner)
 banner_image = Image.open("banner2.png")
-st.image(banner_image, use_column_width=True)
+st.image(banner_image, use_container_width=True)
 
 # CSS personalizado
 st.markdown("""
@@ -192,7 +192,7 @@ else:
 
 # Imagen inferior (footer)
 footer_image = Image.open("footer1.png")
-st.image(footer_image, use_column_width=True)
+st.image(footer_image, use_container_width=True)
 
 # Footer con texto
 st.markdown("""
